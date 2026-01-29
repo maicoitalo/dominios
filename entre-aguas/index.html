@@ -321,12 +321,20 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     background-color: #D9D9D9;
     padding: 4em 0;
     text-align: center;
+    overflow: hidden;
 }
 
 .rota-mobile h2 {
     font-family: 'Runalto', sans-serif;
     color: var(--ast-global-color-3);
     margin-bottom: 20px;
+}
+
+.rota-mobile img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Map Section */
@@ -976,24 +984,14 @@ button:hover, .btn:hover, input[type="submit"]:hover {
         font-size: 1rem !important;
     }
     
+    .rota-mobile img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    
     .map-section {
-        min-height: 60vh;
-        padding: 2em 1em;
-        background-position: center center;
-    }
-    
-    .map-content {
-        text-align: center;
-        max-width: 100%;
-    }
-    
-    .map-content h2 {
-        font-size: 1.5rem;
-        line-height: 1.3em;
-    }
-    
-    .map-content p {
-        font-size: 1.1em;
+        display: none !important;
     }
     
     .carousel-section {
@@ -1342,7 +1340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
         <h2>Rota Ecológica dos Milagres</h2>
         <p class="mb-20" style="font-size: 1.3em; color: var(--ast-global-color-3);">Encanto reconhecido pelo mundo</p>
-        <img src="https://entreaguas.com.br/wp-content/uploads/2025/10/mapa-novo-400px-mobile.webp" alt="Mapa Rota Ecológica" style="max-width: 400px; margin: 0 auto;">
+        <img src="https://entreaguas.com.br/wp-content/uploads/2025/10/mapa-novo-400px-mobile.webp" alt="Mapa Rota Ecológica">
     </div>
 </section>
 
