@@ -68,6 +68,7 @@ body {
     line-height: 1.7em;
     color: var(--ast-global-color-3);
     background-color: #fff;
+    overflow-x: hidden;
 }
 
 a {
@@ -194,6 +195,7 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 .hero-section {
     width: 100%;
     position: relative;
+    margin-top: 60px;
 }
 
 .hero-section img {
@@ -478,6 +480,7 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 
 .beach-club-icons img {
     max-width: 400px;
+    width: 100%;
 }
 
 /* Lounge Section */
@@ -905,12 +908,24 @@ button:hover, .btn:hover, input[type="submit"]:hover {
 }
 
 @media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
     .header {
-        padding: 10px;
+        padding: 8px 10px;
     }
     
     .logo img {
-        max-width: 100px;
+        max-width: 120px;
+    }
+    
+    .hero-section {
+        margin-top: 50px;
     }
     
     .hero-desktop {
@@ -922,9 +937,11 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     }
     
     .cta-elegant {
-        padding: 14px 28px;
-        font-size: 0.85rem;
-        letter-spacing: 1.5px;
+        padding: 12px 24px;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        width: 100%;
+        max-width: 280px;
     }
     
     .cta-strip {
@@ -932,37 +949,94 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     }
     
     .cta-strip p {
-        font-size: 1rem;
+        font-size: 0.95rem;
         padding: 0 10px;
+        line-height: 1.5em;
     }
     
     .features-strip {
-        padding: 3em 1em;
+        padding: 2em 1em;
+    }
+    
+    .feature-item {
+        font-size: 0.95rem;
+        padding: 10px;
     }
     
     .rota-mobile {
         display: block;
+        padding: 2em 1em;
+    }
+    
+    .rota-mobile h2 {
+        font-size: 1.5rem;
+    }
+    
+    .rota-mobile p {
+        font-size: 1rem !important;
     }
     
     .map-section {
-        min-height: 50vh;
+        min-height: 60vh;
+        padding: 2em 1em;
+        background-position: center center;
+    }
+    
+    .map-content {
+        text-align: center;
+        max-width: 100%;
     }
     
     .map-content h2 {
-        text-align: center;
+        font-size: 1.5rem;
+        line-height: 1.3em;
     }
     
     .map-content p {
-        text-align: center;
-        font-size: 1.3em;
+        font-size: 1.1em;
+    }
+    
+    .carousel-section {
+        padding: 2em 0;
+    }
+    
+    .swiper {
+        padding-bottom: 40px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 20px;
     }
     
     .lagoas-section {
-        padding: 3em 1em;
+        padding: 2em 1em;
+    }
+    
+    .lagoas-content h2 {
+        font-size: 1.3rem;
+        line-height: 1.4em;
+    }
+    
+    .lagoas-content h3 {
+        font-size: 1.1rem;
+        line-height: 1.5em;
     }
     
     .lagoas-features {
         flex-direction: column;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .lagoas-feature h3 {
+        font-size: 1.1rem;
     }
     
     .lagoas-cta {
@@ -970,33 +1044,110 @@ button:hover, .btn:hover, input[type="submit"]:hover {
     }
     
     .beach-club-section {
-        padding: 30px 20px;
+        padding: 30px 15px;
+        min-height: auto;
+    }
+    
+    .beach-club-section h2 {
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        margin-bottom: 25px;
+    }
+    
+    .beach-club-grid {
+        gap: 25px;
+    }
+    
+    .beach-club-icons img {
+        max-width: 100%;
+    }
+    
+    .lounge-section {
+        padding: 30px 15px;
+    }
+    
+    .lounge-section h2 {
+        font-size: 1.3rem;
+    }
+    
+    .lounge-section p {
+        font-size: 1rem;
+        padding: 0 10px;
     }
     
     .casas-section {
-        padding: 20px;
+        padding: 30px 15px;
+        min-height: auto;
+    }
+    
+    .casas-grid {
+        gap: 25px;
+    }
+    
+    .casas-content {
+        padding: 10px;
     }
     
     .casas-content h2 {
         text-align: center;
-        font-size: 1.8rem;
+        font-size: 1.3rem;
+        line-height: 1.4em;
     }
     
     .casas-content h3 {
         text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.6;
     }
     
     .casas-cta {
         text-align: center;
+        margin-top: 1.5em;
+    }
+    
+    .facilities-section {
+        padding: 30px 15px;
+        min-height: auto;
+    }
+    
+    .facilities-section h2 {
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        margin-bottom: 20px;
     }
     
     .implantacao-section {
         min-height: auto;
+        padding: 20px 0;
+    }
+    
+    .implantacao-header {
+        padding: 20px 15px;
+        gap: 15px;
+    }
+    
+    .rosa-ventos {
+        width: 60px;
+    }
+    
+    .implantacao-section h2 {
+        font-size: 1.3rem;
     }
     
     .implantacao-legend {
         flex-direction: column;
-        text-align: center;
+        gap: 20px;
+        padding: 20px 15px;
+        text-align: left;
+    }
+    
+    .legend-column {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    .instituto-section {
+        padding: 30px 15px;
     }
     
     .instituto-grid {
@@ -1004,13 +1155,93 @@ button:hover, .btn:hover, input[type="submit"]:hover {
         gap: 30px;
     }
     
-    .contact-section {
-        padding: 2em 1em 4em;
+    .instituto-item img {
+        max-width: 200px;
     }
     
-    h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.5rem; }
-    h3 { font-size: 1.3rem; }
+    .contact-section {
+        padding: 30px 15px 40px;
+    }
+    
+    .contact-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .contact-section p.subtitle {
+        font-size: 1rem;
+        line-height: 1.5em;
+        padding: 0 10px;
+    }
+    
+    .contact-form {
+        padding: 20px 15px;
+    }
+    
+    .contact-form .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .contact-form .form-group label {
+        font-size: 0.8rem;
+    }
+    
+    .contact-form .form-group input,
+    .contact-form .form-group select {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-form .privacy-notice {
+        padding: 10px 12px;
+    }
+    
+    .contact-form .privacy-notice p {
+        font-size: 0.75rem;
+    }
+    
+    .contact-form input[type="submit"] {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .footer {
+        padding: 30px 15px;
+    }
+    
+    .footer-logo {
+        max-width: 250px;
+    }
+    
+    .footer p {
+        font-size: 0.9rem;
+        line-height: 1.6em;
+    }
+    
+    .footer .creci-info {
+        font-size: 0.95rem;
+    }
+    
+    .footer .contato-info {
+        font-size: 1rem;
+    }
+    
+    .whatsapp-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .whatsapp-btn svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
+    h4 { font-size: 1rem; }
 }
 
 /* Utility Classes */
@@ -1398,7 +1629,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             <div class="form-group">
                 <label>Telefone/WhatsApp <span class="required">*</span></label>
-                <input type="tel" name="telefone" placeholder="(62) 9229-1511" required>
+                <input type="tel" name="telefone" placeholder="(11) 91234-5678" required>
             </div>
             
             <div class="form-group">
