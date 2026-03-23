@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LUMINA RISE</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI0IiBmaWxsPSIjMDBmZjg4Ii8+PHBhdGggZD0iTTggMTJIMTZWMjBIOFYxMloiIGZpbGw9IiMwMDAwMDAiLz48cGF0aCBkPSJNMTYgOEgyNFYxNkgxNlY4WiIgZmlsbD0iIzAwMDAwMCIvPjwvc3ZnPgo=">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg-primary:#0a0a0a;--bg-secondary:#111;--bg-tertiary:#1a1a1a;--bg-elevated:#222;--text-primary:#fff;--text-secondary:#b3b3b3;--text-muted:#555;--text-accent:#00ff88;--border-primary:#333;--border-accent:#00ff88;--status-success:#00ff88;--status-warning:#ffaa00;--status-error:#ff4444;--shadow-glow:0 0 20px rgba(0,255,136,0.2);--radius-md:12px;--radius-lg:16px;--radius-xl:24px;--transition:.3s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;gap:1.5rem}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(0,255,136,.03) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(255,255,255,.02) 0%,transparent 50%);z-index:-2;animation:darkPulse 20s ease-in-out infinite}
+@keyframes darkPulse{0%,100%{opacity:.3}50%{opacity:.6}}
+.circuit-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,136,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.02) 1px,transparent 1px);background-size:50px 50px;z-index:-3;animation:gridMove 30s linear infinite}
+@keyframes gridMove{to{background-position:50px 50px}}
+.particles{position:fixed;inset:0;pointer-events:none;z-index:-2}
+.particle{position:absolute;width:2px;height:2px;background:var(--text-accent);border-radius:50%;animation:particleFloat 15s linear infinite}
+.particle:nth-child(1){top:10%;left:15%;animation-delay:0s}.particle:nth-child(2){top:25%;right:20%;animation-delay:3s}.particle:nth-child(3){bottom:30%;left:25%;animation-delay:6s}.particle:nth-child(4){bottom:15%;right:30%;animation-delay:9s}.particle:nth-child(5){top:60%;left:10%;animation-delay:12s}.particle:nth-child(6){top:45%;right:15%;animation-delay:15s}
+@keyframes particleFloat{0%{transform:translateY(0) translateX(0);opacity:0}25%{opacity:.8}50%{transform:translateY(-100px) translateX(50px);opacity:1}75%{opacity:.8}100%{transform:translateY(-200px) translateX(100px);opacity:0}}
+.scan-lines{position:fixed;inset:0;pointer-events:none;z-index:-2;opacity:.05}
+.scan-line{position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--text-accent),transparent);animation:scanMove 4s linear infinite}
+.scan-line:nth-child(1){top:20%;animation-delay:0s}.scan-line:nth-child(2){top:40%;animation-delay:1s}.scan-line:nth-child(3){top:60%;animation-delay:2s}.scan-line:nth-child(4){top:80%;animation-delay:3s}
+@keyframes scanMove{0%{transform:translateX(-100%);opacity:0}50%{opacity:1}100%{transform:translateX(100%);opacity:0}}
+.energy-pulses{position:fixed;inset:0;pointer-events:none;z-index:-2}
+.energy-pulse{position:absolute;width:100px;height:100px;border:1px solid var(--text-accent);border-radius:50%;animation:energyPulse 10s ease-in-out infinite}
+.energy-pulse:nth-child(1){top:25%;left:15%;animation-delay:0s}.energy-pulse:nth-child(2){top:65%;right:20%;animation-delay:5s}
+@keyframes energyPulse{0%{transform:scale(0);opacity:.8}100%{transform:scale(3);opacity:0}}
+.automation-words{position:fixed;inset:0;pointer-events:none;z-index:-1}
+.automation-word{position:absolute;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;color:var(--text-accent);opacity:.06;animation:wordFloat 20s ease-in-out infinite;white-space:nowrap;user-select:none}
+.automation-word:nth-child(1){top:20%;left:15%;animation-delay:0s}.automation-word:nth-child(2){top:30%;right:20%;animation-delay:4s}.automation-word:nth-child(3){top:50%;left:18%;animation-delay:8s}.automation-word:nth-child(4){top:65%;right:22%;animation-delay:12s}.automation-word:nth-child(5){top:80%;left:12%;animation-delay:16s}.automation-word:nth-child(6){top:10%;left:55%;animation-delay:20s}
+@keyframes wordFloat{0%,100%{opacity:.06;transform:translateY(0)}50%{opacity:.12;transform:translateY(-40px)}}
+.binary-counter{position:fixed;top:20px;right:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);opacity:.3;z-index:1;pointer-events:none}
+.container{background:var(--bg-secondary);border:1px solid var(--border-primary);border-radius:var(--radius-xl);padding:3rem 2.5rem;max-width:540px;width:90%;position:relative;backdrop-filter:blur(10px);overflow:hidden}
+.container::before{content:'';position:absolute;inset:-1px;background:linear-gradient(45deg,var(--border-accent),transparent,var(--border-accent));border-radius:var(--radius-xl);z-index:-1;opacity:.3;animation:borderGlow 8s ease-in-out infinite}
+@keyframes borderGlow{0%,100%{opacity:.3}50%{opacity:.6}}
+.logo{font-family:'JetBrains Mono',monospace;font-size:2.4rem;font-weight:700;color:var(--text-accent);letter-spacing:.2em;text-shadow:0 0 20px rgba(0,255,136,.5);text-align:center;position:relative;animation:logoGlitch 10s ease-in-out infinite}
+.logo::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:60px;height:2px;background:var(--text-accent);box-shadow:var(--shadow-glow)}
+@keyframes logoGlitch{0%,90%,100%{transform:translate(0)}91%{transform:translate(-2px,2px)}92%{transform:translate(2px,-2px)}93%{transform:translate(-2px,-2px)}94%{transform:translate(2px,2px)}}
+.logo-subtitle{font-size:.85rem;color:var(--text-primary);opacity:.6;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;margin-top:1.2rem;text-transform:uppercase;text-align:center}
+.header{text-align:center;margin-bottom:2rem}
+.status-bar{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding:1rem 1.5rem;background:var(--bg-tertiary);border:1px solid var(--border-primary);border-radius:var(--radius-lg);position:relative;overflow:hidden}
+.status-bar::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,255,136,.08),transparent);animation:terminalScan 3s ease-in-out infinite}
+@keyframes terminalScan{0%{left:-100%}50%,100%{left:100%}}
+.status-dot{width:8px;height:8px;background:var(--text-accent);border-radius:50%;flex-shrink:0;animation:statusPulse 2s infinite;box-shadow:var(--shadow-glow)}
+@keyframes statusPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.2)}}
+.status-text .l1{font-size:.85rem;font-weight:700;color:var(--text-accent);font-family:'JetBrains Mono',monospace}
+.status-text .l2{font-size:.75rem;color:var(--text-primary);opacity:.8;font-family:'JetBrains Mono',monospace;margin-top:2px}
+.form-group{margin-bottom:1.5rem}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--text-primary);opacity:.85;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.06em}
+input[type=text],input[type=tel]{width:100%;padding:1rem;background:var(--bg-tertiary);border:1px solid var(--border-primary);border-radius:var(--radius-md);color:var(--text-primary);font-size:1rem;outline:none;transition:var(--transition);font-family:Inter,sans-serif}
+input:focus{border-color:var(--border-accent);box-shadow:0 0 0 3px rgba(0,255,136,.1);background:var(--bg-elevated)}
+input::placeholder{color:var(--text-muted)}
+.form-help{margin-top:.5rem;font-size:.75rem;color:var(--text-secondary)}
+.error-msg{margin-top:.5rem;padding:.65rem 1rem;background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.3);border-radius:8px;color:var(--status-error);font-size:.82rem;display:none}
+.btn{width:100%;padding:1rem;border-radius:var(--radius-lg);font-size:.95rem;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;transition:var(--transition);text-transform:uppercase;letter-spacing:.05em;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transition:left .5s}
+.btn:hover::before{left:100%}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--bg-elevated);border:1px solid var(--border-accent);color:var(--text-accent)}
+.btn-primary:hover:not(:disabled){box-shadow:0 0 24px rgba(0,255,136,.25);transform:translateY(-2px)}
+.btn-secondary{background:transparent;border:1px solid var(--border-primary);color:var(--text-secondary)}
+.btn-secondary:hover:not(:disabled){border-color:var(--text-secondary);color:var(--text-primary)}
+.btn-warn{background:rgba(255,170,0,.08);border:1px solid var(--status-warning);color:var(--status-warning)}
+.btn-warn:hover:not(:disabled){background:rgba(255,170,0,.15);box-shadow:0 0 20px rgba(255,170,0,.2)}
+.btn-row{display:flex;gap:.75rem;margin-top:.75rem}
+.btn-row .btn{flex:1}
+.loader{width:36px;height:36px;border:2px solid var(--border-primary);border-top:2px solid var(--text-accent);border-radius:50%;animation:spin 1s linear infinite;margin:1.5rem auto;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status-msg{padding:1.2rem 1.5rem;border-radius:var(--radius-lg);margin-top:1.2rem;font-size:.88rem;line-height:1.6}
+.status-msg.success{background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.25);color:var(--status-success)}
+.status-msg.warning{background:rgba(255,170,0,.07);border:1px solid rgba(255,170,0,.25);color:var(--status-warning)}
+.status-msg.error{background:rgba(255,68,68,.07);border:1px solid rgba(255,68,68,.25);color:var(--status-error)}
+.status-msg.info{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);color:var(--text-secondary)}
+.qr-section{text-align:center;margin-top:1.5rem}
+.qr-label{font-size:.75rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:.8rem;letter-spacing:.05em}
+.qr-section img{width:210px;height:210px;border-radius:var(--radius-lg);border:2px solid var(--border-accent);box-shadow:0 0 30px rgba(0,255,136,.15);display:block;margin:0 auto}
+.qr-actions{display:flex;gap:.75rem;margin-top:1rem}
+.qr-actions .btn{flex:1}
+.timer-bar{margin-top:1rem;padding:.75rem 1rem;background:var(--bg-tertiary);border:1px solid var(--border-primary);border-radius:var(--radius-md);font-size:.8rem;color:var(--text-accent);font-family:'JetBrains Mono',monospace;text-align:center;display:none}
+.pairing-section{margin-top:1rem;padding:1.2rem 1.5rem;background:var(--bg-tertiary);border:1px solid rgba(255,170,0,.3);border-radius:var(--radius-lg);animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.pairing-section label{color:var(--status-warning)}
+.phone-input-wrap{position:relative;display:flex;align-items:center}
+.phone-prefix{position:absolute;left:1rem;font-size:1rem;color:var(--text-muted);font-family:Inter,sans-serif;pointer-events:none;user-select:none}
+.phone-field{padding-left:3.2rem !important}
+.code-display{font-family:'JetBrains Mono',monospace;font-size:2.6rem;font-weight:700;color:var(--text-accent);letter-spacing:.3em;text-shadow:0 0 20px rgba(0,255,136,.4);text-align:center;margin:1rem 0 .4rem;display:none}
+.code-timer{font-size:.75rem;color:var(--status-warning);text-align:center;margin-bottom:1rem;font-family:'JetBrains Mono',monospace}
+.code-steps{padding:.9rem 1rem;background:var(--bg-elevated);border-radius:var(--radius-md);font-size:.78rem;color:var(--text-secondary);line-height:2;margin-top:.5rem}
+.code-steps strong{color:var(--text-primary)}
+.pairing-back{background:none;border:none;color:var(--text-muted);font-size:.78rem;font-family:'JetBrains Mono',monospace;cursor:pointer;margin-top:.8rem;padding:0;display:block;transition:var(--transition)}
+.pairing-back:hover{color:var(--text-accent)}
+.credit{font-family:'JetBrains Mono',monospace;font-size:.9rem;font-weight:500;color:var(--text-accent);opacity:.75;text-align:center;letter-spacing:.08em;text-shadow:0 0 12px rgba(0,255,136,.3);animation:creditGlow 4s ease-in-out infinite}
+.credit a{color:inherit;text-decoration:none}
+.credit a:hover{opacity:1;text-shadow:0 0 20px rgba(0,255,136,.7)}
+@keyframes creditGlow{0%,100%{opacity:.75;text-shadow:0 0 12px rgba(0,255,136,.3)}50%{opacity:1;text-shadow:0 0 20px rgba(0,255,136,.6)}}
+@media(max-width:480px){.container{padding:2rem 1.5rem;border-radius:var(--radius-lg)}.logo{font-size:1.8rem}}
+</style>
+</head>
+<body>
+<div class="circuit-grid"></div>
+<div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div>
+<div class="scan-lines"><div class="scan-line"></div><div class="scan-line"></div><div class="scan-line"></div><div class="scan-line"></div></div>
+<div class="energy-pulses"><div class="energy-pulse"></div><div class="energy-pulse"></div></div>
+<div class="automation-words"><div class="automation-word">AUTOMAÇÃO</div><div class="automation-word">ALGORITMO</div><div class="automation-word">WEBHOOK</div><div class="automation-word">CONEXÃO</div><div class="automation-word">API</div><div class="automation-word">QR CODE</div></div>
+<div class="binary-counter" id="bc">10101010</div>
+<div class="container">
+  <div class="header">
+    <div class="logo">LUMINA RISE</div>
+    <div class="logo-subtitle">SISTEMA DE CONEXÃO SEGURA</div>
+  </div>
+  <div class="status-bar" id="statusBar">
+    <div class="status-dot"></div>
+    <div class="status-text">
+      <div class="l1">SISTEMA OPERACIONAL</div>
+      <div class="l2">AGUARDANDO IDENTIFICAÇÃO</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="instanceName">Identificador da Instância</label>
+    <input type="text" id="instanceName" placeholder="ex: PessoalClinica ou clinica_bianca" autocomplete="off" oninput="onNameInput(this)">
+    <div class="form-help">Use apenas letras, números e underscore. Sem espaços ou acentos.</div>
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+  <button class="btn btn-primary" id="generateBtn" onclick="gerarQRCode()">VERIFICAR E CONECTAR</button>
+  <div class="loader" id="loader"></div>
+  <div id="output"></div>
+</div>
+<div class="credit"><a href="https://www.instagram.com/maicoitalo" rel="noopener noreferrer">by @maicoitalo</a></div>
+<script>
+// ============================================================
+// CONFIGURAÇÃO — altere SEU_HOST_N8N pelo host real do seu n8n
+// Exemplo: 'meu-n8n.exemplo.com.br'
+// ============================================================
+const N8N_HOST = 'webhook.dev.luminarisepro.com';
+const base = 'https://' + N8N_HOST + '/webhook';
+
+const CU = base + '/criar-instancia-uazapi';
+const QU = base + '/qr-code-uazapi';
+const SU = base + '/status-uazapi';
+const RU = base + '/reconectar-instancia-uazapi';
+const PU = base + '/parear-instancia-uazapi';
+const VU = base + '/verificar-instancia-uazapi';
+
+let timerInterval=null,pollInterval=null,pairTimerInterval=null,pairRefreshInterval=null;
+let currentInstance='',instanceToken='',isConnected=false;
+
+setInterval(function(){var b='';for(var i=0;i<8;i++)b+=Math.random()<.5?'1':'0';document.getElementById('bc').textContent=b;},1000);
+
+const isValid=function(n){return /^[a-zA-Z0-9_]+$/.test(n);};
+const transliterate=function(n){return n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9_]/g,'');};
+const format=function(n){return transliterate(n);};
+function _(id){return document.getElementById(id);}
+function setCtx(nome,token,existente){var o=_('output');o.dataset.nome=nome||'';o.dataset.token=token||'';o.dataset.existente=existente?'1':'0';}
+function getNome(){return (_('output').dataset.nome)||'';}
+function getToken(){return (_('output').dataset.token)||'';}
+function getExistente(){return (_('output').dataset.existente)==='1';}
+function normPhone(v){var p=v.replace(/\D/g,'');return '55'+p;}
+function onNameInput(el){
+  hideErr();
+  if(!el.value)return;
+  if(el.value!==format(el.value))showErr('Caractere inválido. Sugestão: '+format(el.value));
+}
+function onPhoneInput(el){el.value=el.value.replace(/\D/g,'');}
+function showErr(m){var e=_('errorMsg');e.textContent=m;e.style.display='block';}
+function hideErr(){_('errorMsg').style.display='none';}
+function setStatus(l1,l2,col){
+  var sb=_('statusBar');
+  var cols={success:'rgba(0,255,136,.3)',warning:'rgba(255,170,0,.3)',error:'rgba(255,68,68,.3)'};
+  sb.style.borderColor=cols[col]||'var(--border-primary)';
+  var dc=col==='warning'?'var(--status-warning)':col==='error'?'var(--status-error)':'var(--text-accent)';
+  sb.innerHTML='<div class="status-dot" style="background:'+dc+'"></div><div class="status-text"><div class="l1">'+l1+'</div><div class="l2">'+l2+'</div></div>';
+}
+async function gerarQRCode(){
+  var nome=_('instanceName').value.trim();
+  hideErr();
+  if(!nome){showErr('Insira o identificador da instância.');return;}
+  if(!isValid(nome)){showErr('Identificador inválido. Use apenas letras, números e underscore.');_('instanceName').value=format(nome);return;}
+  var btn=_('generateBtn');
+  btn.disabled=true;
+  _('loader').style.display='block';
+  _('output').innerHTML='';
+  setCtx(nome,'',false);
+  setStatus('VERIFICANDO...','Verificando '+nome,'');
+  try{
+    var r=await fetch(VU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({instanceName:nome})});
+    var d=await r.json();
+    if(d.ja_existe&&d.state==='connected'){
+      setStatus('INSTÂNCIA JÁ ATIVA','Conectada e operacional','success');
+      _('output').innerHTML='<div class="status-msg error" style="text-align:center"><div style="font-size:2rem;margin-bottom:.5rem">&#128274;</div><strong>INSTÂNCIA JÁ EXISTE</strong><br><span style="opacity:.85">A instância <strong>'+nome+'</strong> já existe e está <strong>conectada</strong>.</span><br><span style="font-size:.8rem;opacity:.65">Escolha outro identificador para criar uma nova instância.</span><div style="margin-top:1rem"><button class="btn btn-secondary" onclick="resetForm()">&#8592; ESCOLHER OUTRO NOME</button></div></div>';
+    }else if(d.ja_existe&&d.state!=='connected'){
+      setCtx(nome,d.token||'',true);
+      setStatus('INSTÂNCIA DESCONECTADA','Reconexão disponível','warning');
+      _('output').innerHTML='<div class="status-msg warning" style="text-align:center"><div style="font-size:2rem;margin-bottom:.5rem">&#9888;</div><strong>INSTÂNCIA JÁ EXISTE</strong><br><span style="opacity:.85">A instância <strong>'+nome+'</strong> já existe mas está <strong>desconectada</strong>.</span><br><span style="font-size:.8rem;opacity:.65;margin-top:.3rem;display:block">O que deseja fazer?</span></div><div class="btn-row" style="margin-top:.8rem"><button class="btn btn-primary" onclick="mostrarEscolhaConexao(getNome())">&#128279; RECONECTAR</button><button class="btn btn-secondary" onclick="resetForm()">&#8592; OUTRO NOME</button></div>';
+    }else{
+      setCtx(nome,'',false);
+      currentInstance=nome;
+      isConnected=false;
+      mostrarEscolhaConexao(nome);
+    }
+  }catch(e){showErr('Erro de conexão: '+e.message);setStatus('ERRO','Tente novamente','error');}
+  _('loader').style.display='none';
+  btn.disabled=false;
+}
+function mostrarEscolhaConexao(nome){
+  setCtx(nome,getToken(),getExistente());
+  _('output').innerHTML='<div class="status-msg info" style="text-align:center;margin-bottom:.5rem"><div style="font-size:1.5rem;margin-bottom:.4rem">&#128241;</div><strong>Como deseja conectar?</strong><br><span style="opacity:.7;font-size:.82rem">Instância: <strong>'+nome+'</strong></span></div><div class="btn-row" style="margin-top:.75rem"><button class="btn btn-primary" onclick="conectarQR(getNome())">&#128247; QR CODE</button><button class="btn btn-warn" onclick="mostrarInputPaircode(getNome())">&#128241; CÓDIGO</button></div><button class="btn btn-secondary" onclick="resetForm()" style="margin-top:.5rem">&#8592; OUTRO NOME</button>';
+  setStatus('AGUARDANDO ESCOLHA','Selecione o método de conexão','');
+}
+async function conectarQR(nome){
+  _('output').innerHTML='';
+  _('loader').style.display='block';
+  var existente=getExistente();
+  setStatus(existente?'RECONECTANDO...':'CRIANDO INSTÂNCIA...',existente?'Buscando QR Code':'Gerando QR Code','');
+  try{
+    var endpoint=existente?RU:CU;
+    var r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({instanceName:nome})});
+    var d=await r.json();
+    instanceToken=d.token||'';
+    currentInstance=nome;
+    isConnected=false;
+    mostrarQR(d);
+  }catch(e){showErr('Erro: '+e.message);setStatus('ERRO','Tente novamente','error');}
+  _('loader').style.display='none';
+}
+function mostrarInputPaircode(nome){
+  setCtx(nome,getToken(),getExistente());
+  _('output').innerHTML='<div class="pairing-section"><div class="form-group" style="margin-bottom:1rem"><label>Número de Telefone</label><div class="phone-input-wrap"><span class="phone-prefix">+55</span><input type="tel" id="phoneInput" class="phone-field" placeholder="47999999999" autocomplete="off" oninput="onPhoneInput(this)" maxlength="11"></div><div class="form-help" style="margin-top:.4rem">DDD + número (10 ou 11 dígitos). O código do país +55 é adicionado automaticamente.</div></div><button class="btn btn-warn" id="btnPaircode" onclick="gerarCodigoDireto(getNome())">&#128241; GERAR CÓDIGO DE PAREAMENTO</button><div class="code-display" id="codeDisplay" style="display:none">----</div><div class="code-timer" id="codeTimer"></div><div class="code-steps" id="codeSteps" style="display:none"><div style="padding:.7rem 1rem;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.2);border-radius:8px;margin-bottom:.8rem;font-size:.8rem;color:var(--text-accent)">&#128241; Uma notificação chegará no seu WhatsApp pedindo para inserir o código — é só digitar o que aparece acima.</div><strong>Como usar o código:</strong><br>1. Abra o WhatsApp no celular<br>2. Aguarde a notificação <strong>ou</strong> vá em <strong>&#8942; Aparelhos conectados</strong><br>3. Toque em <strong>Conectar um aparelho</strong><br>4. Toque em <strong>Conectar com número de telefone</strong><br>5. Digite o código acima</div><button class="pairing-back" onclick="mostrarEscolhaConexao(getNome())">&#8592; Voltar</button></div>';
+  setStatus('MODO PAREAMENTO','Digite o número para receber o código','warning');
+}
+async function gerarCodigoDireto(nome){
+  var raw=_('phoneInput')?_('phoneInput').value.replace(/\D/g,''):'';
+  if(!raw||raw.length<10||raw.length>11){if(_('phoneInput'))_('phoneInput').style.borderColor='var(--status-error)';return;}
+  if(_('phoneInput'))_('phoneInput').style.borderColor='';
+  var phone=normPhone(raw);
+  var btn=_('btnPaircode');
+  if(btn){btn.disabled=true;btn.textContent='Gerando...';}
+  clearInterval(pairTimerInterval);
+  clearInterval(pairRefreshInterval);
+  if(_('codeDisplay'))_('codeDisplay').style.display='none';
+  if(_('codeSteps'))_('codeSteps').style.display='none';
+  if(_('codeTimer'))_('codeTimer').textContent='';
+  var existente=getExistente();
+  var token=getToken();
+  var payload={instanceName:nome,phoneNumber:phone,jaExiste:existente};
+  if(existente&&token)payload.token=token;
+  try{
+    var r=await fetch(PU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    var d=await r.json();
+    var code=d.paircode||d.code||d.pairingCode||d.pairingcode||'';
+    if(code){
+      instanceToken=d.token||token||'';
+      currentInstance=nome;
+      setCtx(nome,instanceToken,true);
+      exibirCodigo(code);
+      pollInterval=setInterval(verificarStatus,5000);
+      pairRefreshInterval=setInterval(function(){renovarPaircode(nome,phone);},55000);
+    }else{
+      if(_('codeTimer')){_('codeTimer').textContent='Erro: '+(d.error||d.message||'Código não gerado. Tente novamente.');_('codeTimer').style.color='var(--status-error)';}
+    }
+  }catch(e){if(_('codeTimer')){_('codeTimer').textContent='Erro: '+e.message;_('codeTimer').style.color='var(--status-error)';}}
+  if(btn){btn.disabled=false;btn.textContent='&#128241; GERAR CÓDIGO DE PAREAMENTO';}
+}
+function exibirCodigo(code){
+  var disp=_('codeDisplay');
+  var timer=_('codeTimer');
+  var steps=_('codeSteps');
+  if(!disp)return;
+  disp.textContent=code;disp.style.display='block';
+  if(steps)steps.style.display='block';
+  clearInterval(pairTimerInterval);
+  var secs=60;
+  if(timer){timer.style.color='var(--status-warning)';timer.textContent='Expira em '+secs+'s — use rapidamente!';}
+  pairTimerInterval=setInterval(function(){
+    secs--;
+    if(secs<=0){clearInterval(pairTimerInterval);if(timer){timer.textContent='Código expirado — renovando...';timer.style.color='var(--status-warning)';}}
+    else if(timer)timer.textContent='Expira em '+secs+'s — use rapidamente!';
+  },1000);
+  setStatus('CÓDIGO GERADO','Digite no WhatsApp rapidamente','warning');
+}
+async function renovarPaircode(nome,phone){
+  if(isConnected)return;
+  var existente=getExistente();
+  var token=getToken();
+  var payload={instanceName:nome,phoneNumber:phone,jaExiste:existente};
+  if(existente&&token)payload.token=token;
+  try{
+    var r=await fetch(PU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    var d=await r.json();
+    var code=d.paircode||d.code||d.pairingCode||d.pairingcode||'';
+    if(code)exibirCodigo(code);
+  }catch(e){}
+}
+async function reconectar(nome){
+  _('output').innerHTML='';
+  _('loader').style.display='block';
+  setStatus('RECONECTANDO...','Buscando QR Code','');
+  try{
+    var r=await fetch(RU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({instanceName:nome})});
+    var d=await r.json();
+    instanceToken=d.token||'';currentInstance=nome;isConnected=false;
+    mostrarQR(d);
+  }catch(e){showErr('Erro: '+e.message);}
+  _('loader').style.display='none';
+}
+function mostrarQR(d){
+  var raw=d&&d.qrcode&&d.qrcode.base64?d.qrcode.base64:d&&d.base64?d.base64:d&&d.qr?d.qr:d&&d.code?d.code:'';
+  var out=_('output');
+  if(d&&d.state==='connected'){handleConnected(currentInstance);return;}
+  if(raw){
+    var src=raw.indexOf('data:')===0?raw:'data:image/png;base64,'+raw;
+    out.innerHTML='<div class="qr-section"><p class="qr-label">ESCANEIE COM O WHATSAPP</p><img id="qrImg" src="'+src+'" alt="QR Code"><div class="qr-actions"><button class="btn btn-primary" onclick="novoQR()">&#8635; NOVO QR</button><button class="btn btn-secondary" onclick="verificarStatus()">VERIFICAR STATUS</button></div></div><div class="timer-bar" id="timerBar"></div>';
+    setStatus('QR CODE GERADO','Aguardando leitura','');
+    iniciarMonitoramento();
+  }else{
+    out.innerHTML='<div class="status-msg info">&#9203; QR não disponível ainda.<button class="btn btn-primary" onclick="novoQR()" style="margin-top:1rem">&#8635; NOVO QR</button></div>';
+    setStatus('AGUARDANDO QR','Instância criada, carregando...','');
+  }
+}
+function iniciarMonitoramento(){
+  clearInterval(timerInterval);clearInterval(pollInterval);
+  var secs=30;
+  var bar=_('timerBar');
+  if(bar)bar.style.display='block';
+  timerInterval=setInterval(function(){
+    if(isConnected)return;secs--;
+    if(bar)bar.textContent='RENOVANDO QR EM '+secs+'s';
+    if(secs<=0){clearInterval(timerInterval);novoQR();}
+  },1000);
+  pollInterval=setInterval(verificarStatus,5000);
+}
+async function novoQR(){
+  if(!currentInstance||!instanceToken)return;
+  try{
+    var r=await fetch(QU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({instanceName:currentInstance,token:instanceToken})});
+    var d=await r.json();
+    var raw=d&&d.qrcode&&d.qrcode.base64?d.qrcode.base64:d&&d.base64?d.base64:d&&d.qr?d.qr:d&&d.code?d.code:'';
+    if(raw){var src=raw.indexOf('data:')===0?raw:'data:image/png;base64,'+raw;var img=_('qrImg');if(img)img.src=src;else mostrarQR(d);}
+    else if(d&&d.state==='connected')handleConnected(currentInstance);
+  }catch(e){}
+}
+async function verificarStatus(){
+  if(!currentInstance||!instanceToken||isConnected)return;
+  try{
+    var r=await fetch(SU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({instanceName:currentInstance,token:instanceToken})});
+    var d=await r.json();
+    if(d.state==='connected')handleConnected(currentInstance);
+  }catch(e){}
+}
+function handleConnected(nome){
+  if(isConnected)return;
+  isConnected=true;
+  clearInterval(timerInterval);clearInterval(pollInterval);clearInterval(pairTimerInterval);clearInterval(pairRefreshInterval);
+  setStatus('CONEXÃO ESTABELECIDA','SISTEMA ATIVO','success');
+  _('output').innerHTML='<div class="status-msg success" style="text-align:center"><div style="font-size:3rem;margin-bottom:.8rem">&#9989;</div><strong style="font-size:1.1rem">CONEXÃO ESTABELECIDA</strong><br><span style="opacity:.85">Instância <strong>'+nome+'</strong> conectada com sucesso.</span><br><span style="font-size:.8rem;opacity:.6">WhatsApp conectado e operacional.</span><div style="margin-top:1.2rem"><button class="btn btn-primary" onclick="resetForm()" style="width:auto;padding:.7rem 1.8rem">+ NOVA INSTÂNCIA</button></div></div>';
+}
+function resetForm(){
+  clearInterval(timerInterval);clearInterval(pollInterval);clearInterval(pairTimerInterval);clearInterval(pairRefreshInterval);
+  currentInstance='';instanceToken='';isConnected=false;
+  _('instanceName').value='';
+  _('output').innerHTML='';
+  _('generateBtn').disabled=false;
+  _('loader').style.display='none';
+  hideErr();
+  setStatus('SISTEMA OPERACIONAL','AGUARDANDO IDENTIFICAÇÃO','');
+}
+</script>
+</body>
+</html>
